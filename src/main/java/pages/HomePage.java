@@ -20,6 +20,9 @@ public class HomePage {
     @FindBy(className = "shopping_cart_link")
     WebElement cartIcon;
 
+    @FindBy(css = "a[id^='item_'][id$='_title_link']")
+    List<WebElement> productLinks;
+
     public HomePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -44,8 +47,6 @@ public class HomePage {
     }
 
     public void addProductToCart(String productName){
-        //add-to-cart-Sauce-Labs-Backpack
-        // add-to-cart-sauce-labs-backpack
         String productId = "add-to-cart-"+productName.replace(" ", "-").toLowerCase();
         WebElement addToCartButton = driver.findElement(By.id(productId));
         addToCartButton.click();
@@ -54,4 +55,30 @@ public class HomePage {
     public void clickOnCartIcon(){
         cartIcon.click();
     }
+
+    public int getProductIndex(String productName) {
+        switch (productName) {
+            case "Sauce Labs Backpack":
+                return 4;
+            case "Sauce Labs Bike Light":
+                return 0;
+            case "Sauce Labs Bolt T-Shirt":
+                return 1;
+            case "Sauce Labs Fleece Jacket":
+                return 5;
+            case "Sauce Labs Onesie":
+                return 2;
+            case "Test.allTheThings() T-Shirt (Red)":
+                return 3;
+            default:
+                throw new IllegalArgumentException("Producto no encontrado: " + productName);
+        }
+    }
+
+    public void enterDetailPage(Integer numero){
+        String productId = "item_"+numero+"_title_link";
+        WebElement detailPageButton = driver.findElement(By.id(productId));
+        detailPageButton.click();
+    }
+
 }

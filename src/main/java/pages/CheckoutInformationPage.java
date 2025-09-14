@@ -21,6 +21,9 @@ public class CheckoutInformationPage {
     @FindBy(id="continue")
     WebElement continueButton;
 
+    @FindBy(css="h3[data-test='error']")
+    WebElement errorMessage;
+
     public CheckoutInformationPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -40,5 +43,12 @@ public class CheckoutInformationPage {
 
     public void clickOnContinueButton(){
         continueButton.click();
+    }
+    public boolean errorMessageIsDisplayed(String message){
+        String actualMessage = errorMessage.getText();
+        if(message.equalsIgnoreCase(actualMessage)){
+            return true;
+        }
+        return false;
     }
 }

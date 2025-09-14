@@ -12,6 +12,8 @@ public class DriverManager {
         if(driver == null){
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized"); // Abre la ventana maximizada
+            options.addArguments("--incognito");
             driver = new ChromeDriver(options);
         }
         return driver;

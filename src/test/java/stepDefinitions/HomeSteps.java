@@ -23,7 +23,11 @@ public class HomeSteps {
     @And("I add the {string} to the cart")
     public void addProductToCart(String productName){
         homePage.addProductToCart(productName);
+    }
 
+    @And("I enter the {string}'s detail page")
+    public void enterDetailPage(String productName){
+        homePage.enterDetailPage(homePage.getProductIndex(productName));
     }
 
     @When("I click on the cart icon")
